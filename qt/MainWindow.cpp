@@ -7,11 +7,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     openFileAction = new QAction(tr("打开"), this);
     exportFileAction = new QAction(tr("导出"), this);
+    infoAction = new QAction(tr("信息"), this);
 
     // 文件菜单
     fileMenu = menuBar()->addMenu(tr("文件"));  //(a)
     fileMenu->addAction(openFileAction);       //(b)
     fileMenu->addAction(exportFileAction);
+    fileMenu->addAction(infoAction);
 
     m_WholeSet = new WholeSet(this);
     m_Slider = new QSlider(Qt::Horizontal, this);
@@ -42,6 +44,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     exportWidget->setWindowModality(Qt::ApplicationModal);
     exportWidget->hide();
 
+
+    infoWidget = new InfoWidget();
+    infoWidget->setWindowModality(Qt::ApplicationModal);
+    infoWidget->hide();
+
+
     connect(openFileAction, &QAction::triggered, [&]
             {
         QString fileName = QFileDialog::getOpenFileName(this, tr("打开ADCP文件"), ".", "二进制文件(*.dat)");
@@ -61,6 +69,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
                     return;
 
                 exportWidget->show();
+            });
+
+    connect(infoAction, &QAction::triggered, [&]
+            {
+                if (m_FileData.isNull())
+                    return;
+
+                infoWidget->show();
             });
 
     connect(m_WholeSet, &WholeSet::updateStartEndCol, m_SubSet, &SubSet::updateStartEndCol);

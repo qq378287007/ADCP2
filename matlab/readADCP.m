@@ -229,58 +229,58 @@ save(Name,'WF','WS','WN','WP',...
 
 
 
+%{
 
-%
-%
+cell=1;                                                                     % 参考层绘图，选值范围1-cell_Num
+figure(1);
+plot(V1(:,cell),'k');xlabel('集合数');ylabel('波束速度(mm/s)');grid on;hold on;
+plot(V2(:,cell),'b');plot(V3(:,cell),'c');plot(V4(:,cell),'r');legend('V1','V2','V3','V4');
 
-%
-% cell=1;                                                                     % 参考层绘图，选值范围1-cell_Num
-% figure(1);
-% plot(V1(:,cell),'k');xlabel('集合数');ylabel('波束速度(mm/s)');grid on;hold on;
-% plot(V2(:,cell),'b');plot(V3(:,cell),'c');plot(V4(:,cell),'r');legend('V1','V2','V3','V4');
-%
-% index=2;                                                                    % index集合点上所有剖面流速分布
-% figure(2);
-% plot(V1(index,:),'r');xlabel('剖面单元层');ylabel('波束速度(mm/s)');
-% %%顺时针
-%
+index=2;                                                                    % index集合点上所有剖面流速分布
+figure(2);
+plot(V1(index,:),'r');xlabel('剖面单元层');ylabel('波束速度(mm/s)');
+%%顺时针
 
 
-% AveV=[];
-% StdV=[];
-%
-% for index=1:cellNum
-%     CellRef=index;
-%     AveV=[AveV,mean(v(10:200,CellRef))];
-%     StdV=[StdV,std(v(10:200,CellRef))];
-%     E1Ave(index)=mean(E1(10:200,CellRef));
-%     E2Ave(index)=mean(E2(10:200,CellRef));
-%     E3Ave(index)=mean(E3(10:200,CellRef));
-%     E4Ave(index)=mean(E4(10:200,CellRef));
-%     figure(3)
-%     plot(v(:,CellRef));
-%
-%     xlabel('样本点数')
-%     ylabel('速度mm/s')
-%     title(['第',num2str(CellRef),'层测量的速度模值'])
-%     pause;
-% end
-% AveV=AveV';
-% StdV=StdV';
-%
-% Distance=WF+WS*[1:WN];
-%
-% figure
-% plot(Distance,AveV)
-% xlabel('剖面距离(m)');ylabel('速度模值(mm/s)');
-% grid on;
-% title('各层测量的速度均值')
-%
-% figure
-% plot(Distance,StdV)
-% xlabel('剖面距离(m)');ylabel('速度方差(mm/s)');
-% grid on;
-% title('各层测量的速度方差')
-%
-% EAve=(E1Ave+E2Ave+E3Ave+E4Ave)/4;
-% EAve=EAve';
+
+v = V1;
+    
+AveV=[];
+StdV=[];
+    
+for index=1:cellNum
+    CellRef=index;
+    AveV=[AveV,mean(v(10:200,CellRef))];
+    StdV=[StdV,std(v(10:200,CellRef))];
+    E1Ave(index)=mean(E1(10:200,CellRef));
+    E2Ave(index)=mean(E2(10:200,CellRef));
+    E3Ave(index)=mean(E3(10:200,CellRef));
+    E4Ave(index)=mean(E4(10:200,CellRef));
+    figure(3)
+    plot(v(:,CellRef));
+
+    xlabel('样本点数')
+    ylabel('速度mm/s')
+    title(['第',num2str(CellRef),'层测量的速度模值'])
+    pause;
+end
+AveV=AveV';
+StdV=StdV';
+
+Distance=WF+WS*[1:WN];
+
+figure
+plot(Distance,AveV)
+xlabel('剖面距离(m)');ylabel('速度模值(mm/s)');
+grid on;
+title('各层测量的速度均值')
+
+figure
+plot(Distance,StdV)
+xlabel('剖面距离(m)');ylabel('速度方差(mm/s)');
+grid on;
+title('各层测量的速度方差')
+
+EAve=(E1Ave+E2Ave+E3Ave+E4Ave)/4;
+EAve=EAve';
+%}

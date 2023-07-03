@@ -1,0 +1,36 @@
+Time
+    Start time  2023/5/20 6:00:00
+    End time 2023/5/21 14:00:00
+System
+    Serial number   17195
+    Model   Workhorse
+    Frequency(kHz)  614
+    Firmware version    51.4
+Setup
+    Model 1
+    Number of cells 12(WN)
+    Cell size(m) 0.20(WS)
+    First cell range(m) 1.31(无)
+Time
+    Sample time 2023/5/20 6:00:00(变化)
+Profile
+    Mean speed(m/s) 0.920(变化)
+    Mean direction(°) 262.89(变化)
+Compass
+    Heading(°) 49.07(变化)
+    Pitch(°) -49.07(变化)
+    Roll(°) 49.07(变化)
+Sensors
+    Temperature(°) 49.07(变化)
+    Pressure(kPa) 5.1(变化)
+    Pressure depth(m) 0.10(变化)
+    Voltage(V) 51.1(变化)
+Bottom track
+    Mode 50
+    Avg.beam depth(m) 22.74(变化)
+    BT speed(m/s) 0.067(变化)
+    BT direction(°) 19.25(无)
+Boundary
+    Water depth(m) 22.74(同Avg.beam depth)
+Quality
+    Built in test(hex) 0

@@ -15,6 +15,7 @@
 #include "FileData.h"
 
 #include "ExportWidget.h"
+#include "InfoWidget.h"
 
 #include "WholeSet.h"
 
@@ -34,6 +35,7 @@ private:
     // 文件菜单项
     QAction *openFileAction;
     QAction *exportFileAction;
+    QAction *infoAction;
 
     // 各项菜单栏
     QMenu *fileMenu;
@@ -52,6 +54,7 @@ private:
     QVBoxLayout *mainLayout;
 
     ExportWidget *exportWidget;
+    InfoWidget *infoWidget;
 
 private:
     QSharedPointer<FileData> m_FileData;
