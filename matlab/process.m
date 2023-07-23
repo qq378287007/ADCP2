@@ -1,12 +1,11 @@
-clear all;
-close all;
-clc;
+clear all;close all;clc;
+
 orgdata = load('SLS150_ADCP_2_20211211113000.mat');
 
-vxb=(orgdata.V2-orgdata.V4)/2/sind(24.6);
-vyb=(orgdata.V1-orgdata.V3)/2/sind(24.6);
-vxorg=0.707*(vxb-vyb);
-vyorg=0.707*(vxb+vyb);
+vxb = (orgdata.V2 - orgdata.V4) / 2 / sind(24.6);
+vyb = (orgdata.V1 - orgdata.V3) / 2 / sind(24.6);
+vxorg = 0.707*(vxb - vyb);
+vyorg = 0.707*(vxb + vyb);
 
 ind=1;
 for i =1:10:length(orgdata.RTC_year)
@@ -221,7 +220,6 @@ dateaxis('x',17)
 grid on;
 title('CTD测量盐度数据图','FontSize',18)
 saveas(gcf,'CTD测量盐度数据图.jpg')
-
 
 for cell = [2,5,7]
     figure(4*cell+6)
