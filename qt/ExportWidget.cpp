@@ -27,7 +27,7 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     m_MaxBin->setValidator(new QIntValidator(1, 12, this));
     m_MaxBin->setMaxLength(2);
     m_MaxBin->setMaximumWidth(25);
-*/
+    */
 
     QHBoxLayout *Bins_Select_UpLayout = new QHBoxLayout();
     Bins_Select_UpLayout->addWidget(selectAll);
@@ -53,15 +53,16 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     QWidget * pWgt = new QWidget;
     QVBoxLayout *pLayout = new QVBoxLayout();//网格布局
     pLayout->addStretch();
+    cbs.resize(12);
     for(int i = 0; i < 12; i++)
     {
         QLabel *pBtn = new QLabel(QString("%1").arg(i+1));
-        QCheckBox *pBox = new QCheckBox();
+        cbs[i] = new QCheckBox();
 
         QHBoxLayout *tmp  = new QHBoxLayout;
         tmp->addStretch();
         tmp->addWidget(pBtn, Qt::AlignRight);//把按钮添加到布局控件中
-        tmp->addWidget(pBox, Qt::AlignLeft);//把按钮添加到布局控件中
+        tmp->addWidget(cbs[i], Qt::AlignLeft);//把按钮添加到布局控件中
         tmp->addStretch();
         pLayout->addLayout(tmp);
     }
@@ -71,10 +72,7 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     //这一句setWidget必须放在pWgt里面的内容都准备完毕之后，否则显示有问题
     scrollArea->setWidget(pWgt);
 
-
     BinsLayout->addWidget(scrollArea);
-
-
 
     //BinsLayout->addLayout(Bins_UpLayout);
     //BinsLayout->addStretch();
@@ -91,11 +89,12 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     m_MaxEnsemble->setMaximumWidth(50);
 
     QHBoxLayout *EnsembleLayout = new QHBoxLayout(m_Ensemble);
-    EnsembleLayout->addWidget(new QLabel("MinEnsemble: ", m_Ensemble));
-    EnsembleLayout->addWidget(m_MinEnsemble);
     EnsembleLayout->addStretch();
-    EnsembleLayout->addWidget(new QLabel("MaxEnsemble: ", m_Ensemble));
+    EnsembleLayout->addWidget(new QLabel("Between ", m_Ensemble));
+    EnsembleLayout->addWidget(m_MinEnsemble);
+    EnsembleLayout->addWidget(new QLabel(" and ", m_Ensemble));
     EnsembleLayout->addWidget(m_MaxEnsemble);
+    EnsembleLayout->addStretch();
 
     m_DataType = new QGroupBox("Data Type", this);
     QGroupBox *m_Speed = new QGroupBox("流速剖面", this);
@@ -103,12 +102,14 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     QGroupBox *m_Cor = new QGroupBox("相关系数", this);
     QGroupBox *m_Bottom = new QGroupBox("底跟踪", this);
     QGroupBox *m_Sensor = new QGroupBox("传感器", this);
+    QGroupBox *m_Calculate = new QGroupBox("计算值", this);
     QVBoxLayout *DataLayout = new QVBoxLayout(m_DataType);
     DataLayout->addWidget(m_Speed);
     DataLayout->addWidget(m_Strength);
     DataLayout->addWidget(m_Cor);
     DataLayout->addWidget(m_Bottom);
     DataLayout->addWidget(m_Sensor);
+    DataLayout->addWidget(m_Calculate);
     DataLayout->addStretch();
 
     QStringList strList;
@@ -201,6 +202,19 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     }
     SensorLayout->addStretch();
 
+    QHBoxLayout *CalculateLayout = new QHBoxLayout(m_Calculate);
+    strList.clear();
+    strList<<"Ve"<<"Vn"<<"V"<<"Angle";
+    foreach(auto str, strList){
+        QCheckBox *cb = new QCheckBox(str,this);
+        CalculateLayout->addWidget(cb);
+        connect(cb, &QCheckBox::clicked, this, &ExportWidget::CheckBox_Clicked);
+    }
+    CalculateLayout->addStretch();
+
+
+
+
     upLayout = new QGridLayout();
     upLayout->addWidget(m_FileType, 0, 0);
     upLayout->addWidget(m_Ensemble, 0, 1);
@@ -221,6 +235,19 @@ ExportWidget::ExportWidget(QWidget *parent) : QWidget(parent)
     mainLayout->addLayout(downLayout);
 
     setMinimumSize(600, 600);
+
+    connect(selectAll, &QPushButton::clicked, [=]()
+    {
+        for(int i = 0; i < 12; i++)
+            cbs[i]->setChecked(true);
+    });
+    connect(selectNone, &QPushButton::clicked, [=]()
+    {
+        for(int i = 0; i < 12; i++)
+            cbs[i]->setChecked(false);
+    });
+
+
 
     connect(cancelBtn, &QPushButton::clicked, [=]()
     { hide(); });

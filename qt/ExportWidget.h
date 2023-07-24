@@ -44,6 +44,7 @@ private:
     QPushButton *selectNone;
     QLineEdit *m_MinBin;
     QLineEdit *m_MaxBin;
+    QVector<QCheckBox *> cbs;
 
     QGroupBox *m_Ensemble;
     QLineEdit *m_MinEnsemble;

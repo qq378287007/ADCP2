@@ -16,6 +16,6 @@ link_libraries(Qt5::Widgets)
 file(GLOB ALL_FILE "*.h" "*.cpp")
 add_executable(${DIR_NAME} WIN32 ${ALL_FILE})
 
-target_include_directories(${DIR_NAME} PRIVATE D:/soft/MATLAB/R2021b/extern/include)
-target_link_directories(${DIR_NAME} PRIVATE D:/soft/MATLAB/R2021b/extern/lib/win64/mingw64)
+target_include_directories(${DIR_NAME} PRIVATE D:/soft/matlab/extern/include)
+target_link_directories(${DIR_NAME} PRIVATE D:/soft/matlab/extern/lib/win64/mingw64)
 target_link_libraries(${DIR_NAME} libmat libmx) #libmex libeng

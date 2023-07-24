@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include <QDebug>
 
 #include "mat.h"
 
 #include "FileData.h"
+
+#define PI acos(-1.0)
 
 static void fskip(FILE *stream, long offset)
 {
@@ -216,6 +219,22 @@ FileData::FileData(const QString &FileName)
     Pitch = (double *)malloc(sizeof(double) * Ping_Num);
     Heading = (double *)malloc(sizeof(double) * Ping_Num);
 
+    // 计算值
+    Ve = (double *)malloc(sizeof(double) * cellNum * Ping_Num);
+    Vn = (double *)malloc(sizeof(double) * cellNum * Ping_Num);
+    V = (double *)malloc(sizeof(double) * cellNum * Ping_Num);
+    Angle = (double *)malloc(sizeof(double) * cellNum * Ping_Num);
+
+
+    double vxb;
+    double vyb;
+    double vx;
+    double vy;
+    double kFactor = 1.0;
+    double alpha = 0.0;
+    double ve;
+    double vn;
+    double angle;
     fseek(fid, 0, SEEK_SET);
     for (int ind = 0; ind < Ping_Num; ind++)
     {
@@ -342,6 +361,28 @@ FileData::FileData(const QString &FileName)
         Pitch[ind] = freadInt16ToDouble(fid) / 10.0;
         Heading[ind] = freadInt16ToDouble(fid) / 100.0;
 
+
+        // 计算值
+        for (int index = 0; index < cellNum; index++)
+        {
+            vxb = (V2[Ping_Num * index + ind] - V4[Ping_Num * index + ind]) / 2 / sin(24.6 / 180.0 * PI);
+            vyb = (V1[Ping_Num * index + ind] - V3[Ping_Num * index + ind]) / 2 / sin(24.6 / 180.0 * PI);
+            vx = 0.707 * (vxb - vyb);
+            vy = 0.707 * (vxb + vyb);
+
+            ve = kFactor * (vy * sin((Heading[ind] - alpha) / 180.0 * PI) + vx * cos((Heading[ind] - alpha) / 180.0 * PI)) ;
+            vn = kFactor * (vy * cos((alpha - Heading[ind]) / 180.0 * PI) + vx * sin((alpha - Heading[ind]) / 180.0 * PI)) ;
+
+            Ve[Ping_Num * index + ind] = ve;
+            Vn[Ping_Num * index + ind] = vn;
+            V[Ping_Num * index + ind] = sqrt(ve*ve+vn*vn);
+
+            angle = atan2(ve, vn) * 180 / PI;
+            if(angle<0.0)
+                angle += 360.0;
+            Angle[Ping_Num * index + ind] = angle;
+        }
+
         fskip(fid, 1);
         fskip(fid, 2);
         fskip(fid, 4);
@@ -407,6 +448,11 @@ FileData::FileData(const QString &FileName)
 
 FileData::~FileData()
 {
+    free(Angle);
+    free(V);
+    free(Vn);
+    free(Ve);
+
     free(Heading);
     free(Pitch);
     free(Roll);

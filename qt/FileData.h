@@ -106,6 +106,12 @@ public:
     double *Pitch;
     double *Heading;
 
+    //  计算值
+    double *Ve;
+    double *Vn;
+    double *V;
+    double *Angle;
+
     int min_bin;
     int max_bin;
     int min_ensemble;
