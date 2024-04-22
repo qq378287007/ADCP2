@@ -4,18 +4,18 @@ Name = 'SLS150_ADCP_2_20211211113000.dat';
 fid = fopen(Name);
 
 fseek(fid,38,'bof');
-cellNum = fread(fid, 1, 'uint8');%²ãÊı
-pingLength = 32 + 32 + (2+cellNum*8) * 2 + (2 + cellNum * 4) + 48 + 32 + 16;%Ö¡³¤
+cellNum = fread(fid, 1, 'uint8');%å±‚æ•°
+pingLength = 32 + 32 + (2+cellNum*8) * 2 + (2 + cellNum * 4) + 48 + 32 + 16;%å¸§é•¿
 
 fseek(fid,0,'eof');
-count = ftell(fid);%ÎÄ¼ş×Ö½ÚÊı
-Ping_Num =count / (32 + 32 + 2 * (cellNum * 8 + 2) + (cellNum * 4 + 2) + 96);%Ö¡Êı
+count = ftell(fid);%æ–‡ä»¶å­—èŠ‚æ•°
+Ping_Num =count / (32 + 32 + 2 * (cellNum * 8 + 2) + (cellNum * 4 + 2) + 96);%å¸§æ•°
 
-%Êı¾İÍ·ÎÄ¼ş
+%æ•°æ®å¤´æ–‡ä»¶
 Data_ID = cell(Ping_Num, 1);
 Ping_byte = zeros(Ping_Num, 1);
 
-%²âÁ¿²ÎÊıÉèÖÃ
+%æµ‹é‡å‚æ•°è®¾ç½®
 Para_ID = cell(Ping_Num, 1);
 RTC_year = zeros(Ping_Num, 1);
 RTC_month = zeros(Ping_Num, 1);
@@ -24,28 +24,28 @@ RTC_hour = zeros(Ping_Num, 1);
 RTC_min = zeros(Ping_Num, 1);
 RTC_sec = zeros(Ping_Num, 1);
 
-%Á÷ËÙÆÊÃæÊı¾İ
+%æµé€Ÿå‰–é¢æ•°æ®
 Current_ID = cell(Ping_Num, 1);
 V1 = zeros(Ping_Num, cellNum);
 V2 = zeros(Ping_Num, cellNum);
 V3 = zeros(Ping_Num, cellNum);
 V4 = zeros(Ping_Num, cellNum);
 
-%»Ø²¨Ç¿¶ÈÆÊÃæÊı¾İ
+%å›æ³¢å¼ºåº¦å‰–é¢æ•°æ®
 Intensity_ID = cell(Ping_Num, 1);
 E1 = zeros(Ping_Num, cellNum);
 E2 = zeros(Ping_Num, cellNum);
 E3 = zeros(Ping_Num, cellNum);
 E4 = zeros(Ping_Num, cellNum);
 
-%Ïà¹ØÏµÊıÆÊÃæÊı¾İ
+%ç›¸å…³ç³»æ•°å‰–é¢æ•°æ®
 Correlation_ID = cell(Ping_Num, 1);
 Cor1 = zeros(Ping_Num, cellNum);
 Cor2 = zeros(Ping_Num, cellNum);
 Cor3 = zeros(Ping_Num, cellNum);
 Cor4 = zeros(Ping_Num, cellNum);
 
-%µ×¸ú×ÙÊı¾İ
+%åº•è·Ÿè¸ªæ•°æ®
 BottomTrack_ID = cell(Ping_Num, 1);
 BTV1 = zeros(Ping_Num, 1);
 BTV2 = zeros(Ping_Num, 1);
@@ -72,7 +72,7 @@ BTP2 = zeros(Ping_Num, 1);
 BTP3 = zeros(Ping_Num, 1);
 BTP4 = zeros(Ping_Num, 1);
 
-%´«¸ĞÆ÷Êı¾İ£¨´ÅÂŞÅÌ¡¢ÎÂ¶È¡¢Ñ¹Á¦¼°GPSÊı¾İ£©
+%ä¼ æ„Ÿå™¨æ•°æ®ï¼ˆç£ç½—ç›˜ã€æ¸©åº¦ã€å‹åŠ›åŠGPSæ•°æ®ï¼‰
 Sensor_ID = cell(Ping_Num, 1);
 Pressure = zeros(Ping_Num, 1);
 Temp     = zeros(Ping_Num, 1);
@@ -86,7 +86,7 @@ NOS  = zeros(Ping_Num, 1);
 %Lat_deg  = zeros(Ping_Num, 1);
 %Lat_sec  = zeros(Ping_Num, 1);
 
-%Êı¾İÎ²¼°Ğ£ÑéºÍÊı¾İ
+%æ•°æ®å°¾åŠæ ¡éªŒå’Œæ•°æ®
 Check_ID = cell(Ping_Num, 1);
 Voltage  = zeros(Ping_Num, 1);
 Check_Sum  = zeros(Ping_Num, 1);
@@ -94,9 +94,9 @@ Check_Sum  = zeros(Ping_Num, 1);
 fseek(fid,0,'bof');
 %Ping_Num = 500;
 for ind = 1 : Ping_Num
-    %% *******************************Êı¾İÍ·ÎÄ¼ş************************************** %%
-    Data_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                   % Êı¾İÍ·ID: 0x7F,0x7F
-    Ping_byte(ind) = fread(fid, 1, 'uint16') ;                         % Ö¡³¤: 32+32+(2+cellNum*8)*2+(2+cellNum*4)+48+32+16
+    %% *******************************æ•°æ®å¤´æ–‡ä»¶************************************** %%
+    Data_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                   % æ•°æ®å¤´ID: 0x7F,0x7F
+    Ping_byte(ind) = fread(fid, 1, 'uint16') ;                         % å¸§é•¿: 32+32+(2+cellNum*8)*2+(2+cellNum*4)+48+32+16
     Offset1 = fread(fid, 1, 'uint16') ;                                % Offset1
     Offset2 = fread(fid, 1, 'uint16') ;                                % Offset2
     Offset3 = fread(fid, 1, 'uint16') ;                                % Offset3
@@ -104,119 +104,119 @@ for ind = 1 : Ping_Num
     Offset5 = fread(fid, 1, 'uint16') ;                                % Offset5
     Offset6 = fread(fid, 1, 'uint16') ;                                % Offset6
     Offset7 = fread(fid, 1, 'uint16') ;                                % Offset7
-    fread(fid, 14, 'uchar');                                         % 14¸ö±£Áô×Ö½Ú
+    fread(fid, 14, 'uchar');                                         % 14ä¸ªä¿ç•™å­—èŠ‚
 
-    %% ******************************²âÁ¿²ÎÊıÉèÖÃ*************************************** %%
-    Para_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                        % Êı¾İÍ·ID: 0x00,0x01
-    WF = fread(fid, 1, 'uint16')/100 ;                                      % Ã¤Çø(m)
-    WS = fread(fid, 1, 'uint16')/100 ;                                      % ²ãºñ(m)
-    WN = fread(fid, 1, 'uint8') ;                                           % ²ãÊı
-    WP = fread(fid, 1, 'uint16') ;                                          % …çÊı
-    TP_min = fread(fid, 1, 'uint8') ;                                       % …çÖÜÆÚ£¨min£©
-    TP_sec = fread(fid, 1, 'uint8') ;                                       % …çÖÜÆÚ£¨Sec£©
+    %% ******************************æµ‹é‡å‚æ•°è®¾ç½®*************************************** %%
+    Para_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                        % æ•°æ®å¤´ID: 0x00,0x01
+    WF = fread(fid, 1, 'uint16')/100 ;                                      % ç›²åŒº(m)
+    WS = fread(fid, 1, 'uint16')/100 ;                                      % å±‚åš(m)
+    WN = fread(fid, 1, 'uint8') ;                                           % å±‚æ•°
+    WP = fread(fid, 1, 'uint16') ;                                          % å‘¯æ•°
+    TP_min = fread(fid, 1, 'uint8') ;                                       % å‘¯å‘¨æœŸï¼ˆminï¼‰
+    TP_sec = fread(fid, 1, 'uint8') ;                                       % å‘¯å‘¨æœŸï¼ˆSecï¼‰
 
-    TF_year = fread(fid, 1, 'uint8') ;                                      % TFÊ±¼ä£¨Äê£©
-    TF_month = fread(fid, 1, 'uint8') ;                                     % TFÊ±¼ä£¨ÔÂ£©
-    TF_day = fread(fid, 1, 'uint8') ;                                       % TFÊ±¼ä£¨ÈÕ£©
-    TF_hour = fread(fid, 1, 'uint8') ;                                      % TFÊ±¼ä£¨Ê±£©
-    TF_min = fread(fid, 1, 'uint8') ;                                       % TFÊ±¼ä£¨·Ö£©
-    TF_sec = fread(fid, 1, 'uint8') ;                                       % TFÊ±¼ä£¨Ãë£©
+    TF_year = fread(fid, 1, 'uint8') ;                                      % TFæ—¶é—´ï¼ˆå¹´ï¼‰
+    TF_month = fread(fid, 1, 'uint8') ;                                     % TFæ—¶é—´ï¼ˆæœˆï¼‰
+    TF_day = fread(fid, 1, 'uint8') ;                                       % TFæ—¶é—´ï¼ˆæ—¥ï¼‰
+    TF_hour = fread(fid, 1, 'uint8') ;                                      % TFæ—¶é—´ï¼ˆæ—¶ï¼‰
+    TF_min = fread(fid, 1, 'uint8') ;                                       % TFæ—¶é—´ï¼ˆåˆ†ï¼‰
+    TF_sec = fread(fid, 1, 'uint8') ;                                       % TFæ—¶é—´ï¼ˆç§’ï¼‰
 
-    TE_hour = fread(fid, 1, 'uint8') ;                                      % TEÊ±¼ä£¨Ê±£©
-    TE_min = fread(fid, 1, 'uint8') ;                                       % TEÊ±¼ä£¨·Ö£©
-    TE_sec = fread(fid, 1, 'uint8') ;                                       % TEÊ±¼ä£¨Ãë£©
+    TE_hour = fread(fid, 1, 'uint8') ;                                      % TEæ—¶é—´ï¼ˆæ—¶ï¼‰
+    TE_min = fread(fid, 1, 'uint8') ;                                       % TEæ—¶é—´ï¼ˆåˆ†ï¼‰
+    TE_sec = fread(fid, 1, 'uint8') ;                                       % TEæ—¶é—´ï¼ˆç§’ï¼‰
 
-    TB_hour = fread(fid, 1, 'uint8') ;                                      % TBÊ±¼ä£¨Ê±£©
-    TB_min = fread(fid, 1, 'uint8') ;                                       % TBÊ±¼ä£¨·Ö£©
-    TB_sec = fread(fid, 1, 'uint8') ;                                       % TBÊ±¼ä£¨Ãë£©
+    TB_hour = fread(fid, 1, 'uint8') ;                                      % TBæ—¶é—´ï¼ˆæ—¶ï¼‰
+    TB_min = fread(fid, 1, 'uint8') ;                                       % TBæ—¶é—´ï¼ˆåˆ†ï¼‰
+    TB_sec = fread(fid, 1, 'uint8') ;                                       % TBæ—¶é—´ï¼ˆç§’ï¼‰
 
-    TC = fread(fid, 1, 'uint16') ;                                          % TCÊıÄ¿
+    TC = fread(fid, 1, 'uint16') ;                                          % TCæ•°ç›®
 
-    RTC_year(ind) = fread(fid, 1, 'uint8') ;                                % ¼ÇÂ¼Ê±¼ä£¨Äê£©
-    RTC_month(ind) = fread(fid, 1, 'uint8') ;                               % ¼ÇÂ¼Ê±¼ä£¨ÔÂ£©
-    RTC_day(ind) = fread(fid, 1, 'uint8') ;                                 % ¼ÇÂ¼Ê±¼ä£¨ÈÕ£©
-    RTC_hour(ind) = fread(fid, 1, 'uint8') ;                                % ¼ÇÂ¼Ê±¼ä£¨Ê±£©
-    RTC_min(ind) = fread(fid, 1, 'uint8') ;                                 % ¼ÇÂ¼Ê±¼ä£¨·Ö£©
-    RTC_sec(ind) = fread(fid, 1, 'uint8') ;                                 % ¼ÇÂ¼Ê±¼ä£¨Ãë£©
-    fread(fid, 1, 'uchar');                                               % 1¸ö±£Áô×Ö½Ú
+    RTC_year(ind) = fread(fid, 1, 'uint8') ;                                % è®°å½•æ—¶é—´ï¼ˆå¹´ï¼‰
+    RTC_month(ind) = fread(fid, 1, 'uint8') ;                               % è®°å½•æ—¶é—´ï¼ˆæœˆï¼‰
+    RTC_day(ind) = fread(fid, 1, 'uint8') ;                                 % è®°å½•æ—¶é—´ï¼ˆæ—¥ï¼‰
+    RTC_hour(ind) = fread(fid, 1, 'uint8') ;                                % è®°å½•æ—¶é—´ï¼ˆæ—¶ï¼‰
+    RTC_min(ind) = fread(fid, 1, 'uint8') ;                                 % è®°å½•æ—¶é—´ï¼ˆåˆ†ï¼‰
+    RTC_sec(ind) = fread(fid, 1, 'uint8') ;                                 % è®°å½•æ—¶é—´ï¼ˆç§’ï¼‰
+    fread(fid, 1, 'uchar');                                               % 1ä¸ªä¿ç•™å­—èŠ‚
 
-    %% *******************************Á÷ËÙÆÊÃæÊı¾İ************************************ %%
-    Current_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                               % Êı¾İÍ·ID: 0x00,0x02
+    %% *******************************æµé€Ÿå‰–é¢æ•°æ®************************************ %%
+    Current_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                               % æ•°æ®å¤´ID: 0x00,0x02
     for index = 1 : cellNum
-        V1(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % µÚindex²ã1#²¨ÊøËÙ¶È(µ¥Î»:mm/s)
-        V2(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % µÚindex²ã2#²¨ÊøËÙ¶È(µ¥Î»:mm/s)
-        V3(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % µÚindex²ã3#²¨ÊøËÙ¶È(µ¥Î»:mm/s)
-        V4(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % µÚindex²ã4#²¨ÊøËÙ¶È(µ¥Î»:mm/s)
+        V1(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % ç¬¬indexå±‚1#æ³¢æŸé€Ÿåº¦(å•ä½:mm/s)
+        V2(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % ç¬¬indexå±‚2#æ³¢æŸé€Ÿåº¦(å•ä½:mm/s)
+        V3(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % ç¬¬indexå±‚3#æ³¢æŸé€Ÿåº¦(å•ä½:mm/s)
+        V4(ind, index)= fread(fid, 1, 'int16=>double')/1000;                    % ç¬¬indexå±‚4#æ³¢æŸé€Ÿåº¦(å•ä½:mm/s)
     end
 
-    %% *****************************»Ø²¨Ç¿¶ÈÆÊÃæÊı¾İ*********************************** %%
-    Intensity_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                        % Êı¾İÍ·ID: 0x00,0x03
+    %% *****************************å›æ³¢å¼ºåº¦å‰–é¢æ•°æ®*********************************** %%
+    Intensity_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                        % æ•°æ®å¤´ID: 0x00,0x03
     for index = 1 : cellNum
-        E1(ind, index)= fread(fid, 1, 'uint16');                           % µÚindex²ã1#²¨Êø»Ø²¨Ç¿¶È
-        E2(ind, index)= fread(fid, 1, 'uint16');                           % µÚindex²ã2#²¨Êø»Ø²¨Ç¿¶È
-        E3(ind, index)= fread(fid, 1, 'uint16');                           % µÚindex²ã3#²¨Êø»Ø²¨Ç¿¶È
-        E4(ind, index)= fread(fid, 1, 'uint16');                           % µÚindex²ã4#²¨Êø»Ø²¨Ç¿¶È
+        E1(ind, index)= fread(fid, 1, 'uint16');                           % ç¬¬indexå±‚1#æ³¢æŸå›æ³¢å¼ºåº¦
+        E2(ind, index)= fread(fid, 1, 'uint16');                           % ç¬¬indexå±‚2#æ³¢æŸå›æ³¢å¼ºåº¦
+        E3(ind, index)= fread(fid, 1, 'uint16');                           % ç¬¬indexå±‚3#æ³¢æŸå›æ³¢å¼ºåº¦
+        E4(ind, index)= fread(fid, 1, 'uint16');                           % ç¬¬indexå±‚4#æ³¢æŸå›æ³¢å¼ºåº¦
     end
 
-    %% *****************************Ïà¹ØÏµÊıÆÊÃæÊı¾İ*********************************** %%
-    Correlation_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                      % Êı¾İÍ·ID: 0x00,0x04
+    %% *****************************ç›¸å…³ç³»æ•°å‰–é¢æ•°æ®*********************************** %%
+    Correlation_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                      % æ•°æ®å¤´ID: 0x00,0x04
     for index = 1 : cellNum
-        Cor1(ind, index) = fread(fid, 1, 'uint8') ;                          % 1#²¨ÊøÏà¹ØÏµÊı
-        Cor2(ind, index) = fread(fid, 1, 'uint8') ;                          % 2#²¨ÊøÏà¹ØÏµÊı
-        Cor3(ind, index) = fread(fid, 1, 'uint8') ;                          % 3#²¨ÊøÏà¹ØÏµÊı
-        Cor4(ind, index) = fread(fid, 1, 'uint8') ;                          % 4#²¨ÊøÏà¹ØÏµÊı
+        Cor1(ind, index) = fread(fid, 1, 'uint8') ;                          % 1#æ³¢æŸç›¸å…³ç³»æ•°
+        Cor2(ind, index) = fread(fid, 1, 'uint8') ;                          % 2#æ³¢æŸç›¸å…³ç³»æ•°
+        Cor3(ind, index) = fread(fid, 1, 'uint8') ;                          % 3#æ³¢æŸç›¸å…³ç³»æ•°
+        Cor4(ind, index) = fread(fid, 1, 'uint8') ;                          % 4#æ³¢æŸç›¸å…³ç³»æ•°
     end
 
-    %% *******************************µ×¸ú×ÙÊı¾İ************************************** %%
-    BottomTrack_ID{ind}=  dec2hex(fread(fid, 2, 'uchar')) ;                      % Êı¾İÍ·ID: 0x00,0x05
+    %% *******************************åº•è·Ÿè¸ªæ•°æ®************************************** %%
+    BottomTrack_ID{ind}=  dec2hex(fread(fid, 2, 'uchar')) ;                      % æ•°æ®å¤´ID: 0x00,0x05
 
-    BTV1(ind) = fread(fid, 1, 'int16=>double') ;                            % 1#²¨Êøµ×¸ú×ÙËÙ¶È(µ¥Î»:mm/s)
-    BTV2(ind) = fread(fid, 1, 'int16=>double') ;                            % 2#²¨Êøµ×¸ú×ÙËÙ¶È(µ¥Î»:mm/s)
-    BTV3(ind) = fread(fid, 1, 'int16=>double') ;                            % 3#²¨Êøµ×¸ú×ÙËÙ¶È(µ¥Î»:mm/s)
-    BTV4(ind) = fread(fid, 1, 'int16=>double') ;                            % 4#²¨Êøµ×¸ú×ÙËÙ¶È(µ¥Î»:mm/s)
+    BTV1(ind) = fread(fid, 1, 'int16=>double') ;                            % 1#æ³¢æŸåº•è·Ÿè¸ªé€Ÿåº¦(å•ä½:mm/s)
+    BTV2(ind) = fread(fid, 1, 'int16=>double') ;                            % 2#æ³¢æŸåº•è·Ÿè¸ªé€Ÿåº¦(å•ä½:mm/s)
+    BTV3(ind) = fread(fid, 1, 'int16=>double') ;                            % 3#æ³¢æŸåº•è·Ÿè¸ªé€Ÿåº¦(å•ä½:mm/s)
+    BTV4(ind) = fread(fid, 1, 'int16=>double') ;                            % 4#æ³¢æŸåº•è·Ÿè¸ªé€Ÿåº¦(å•ä½:mm/s)
 
-    BTDepth1(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 1#²¨Êøµ×¸ú×ÙÉî¶È(µ¥Î»£ºm)
-    BTDepth2(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 2#²¨Êøµ×¸ú×ÙÉî¶È(µ¥Î»£ºm)
-    BTDepth3(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 3#²¨Êøµ×¸ú×ÙÉî¶È(µ¥Î»£ºm)
-    BTDepth4(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 4#²¨Êøµ×¸ú×ÙÉî¶È(µ¥Î»£ºm)
+    BTDepth1(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 1#æ³¢æŸåº•è·Ÿè¸ªæ·±åº¦(å•ä½ï¼šm)
+    BTDepth2(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 2#æ³¢æŸåº•è·Ÿè¸ªæ·±åº¦(å•ä½ï¼šm)
+    BTDepth3(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 3#æ³¢æŸåº•è·Ÿè¸ªæ·±åº¦(å•ä½ï¼šm)
+    BTDepth4(ind) = fread(fid, 1, 'uint16')/100.0 ;                         % 4#æ³¢æŸåº•è·Ÿè¸ªæ·±åº¦(å•ä½ï¼šm)
 
-    BTE1(ind) = fread(fid, 1, 'uint16');                                    % 1#²¨Êøµ×¸ú×Ù»Ø²¨Ç¿¶È
-    BTE2(ind) = fread(fid, 1, 'uint16');                                    % 2#²¨Êøµ×¸ú×Ù»Ø²¨Ç¿¶È
-    BTE3(ind) = fread(fid, 1, 'uint16');                                    % 3#²¨Êøµ×¸ú×Ù»Ø²¨Ç¿¶È
-    BTE4(ind) = fread(fid, 1, 'uint16');                                    % 4#²¨Êøµ×¸ú×Ù»Ø²¨Ç¿¶È
+    BTE1(ind) = fread(fid, 1, 'uint16');                                    % 1#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢å¼ºåº¦
+    BTE2(ind) = fread(fid, 1, 'uint16');                                    % 2#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢å¼ºåº¦
+    BTE3(ind) = fread(fid, 1, 'uint16');                                    % 3#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢å¼ºåº¦
+    BTE4(ind) = fread(fid, 1, 'uint16');                                    % 4#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢å¼ºåº¦
 
-    BTCor1(ind) = fread(fid, 1, 'uint8');                                   % 1#²¨Êøµ×¸ú×Ù»Ø²¨Ïà¹ØÏµÊı
-    BTCor2(ind) = fread(fid, 1, 'uint8');                                   % 2#²¨Êøµ×¸ú×Ù»Ø²¨Ïà¹ØÏµÊı
-    BTCor3(ind) = fread(fid, 1, 'uint8');                                   % 3#²¨Êøµ×¸ú×Ù»Ø²¨Ïà¹ØÏµÊı
-    BTCor4(ind) = fread(fid, 1, 'uint8');                                   % 4#²¨Êøµ×¸ú×Ù»Ø²¨Ïà¹ØÏµÊı
+    BTCor1(ind) = fread(fid, 1, 'uint8');                                   % 1#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢ç›¸å…³ç³»æ•°
+    BTCor2(ind) = fread(fid, 1, 'uint8');                                   % 2#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢ç›¸å…³ç³»æ•°
+    BTCor3(ind) = fread(fid, 1, 'uint8');                                   % 3#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢ç›¸å…³ç³»æ•°
+    BTCor4(ind) = fread(fid, 1, 'uint8');                                   % 4#æ³¢æŸåº•è·Ÿè¸ªå›æ³¢ç›¸å…³ç³»æ•°
 
-    BTP1(ind) = fread(fid, 1, 'uint8');                                     % 1#²¨Êøµ×¸ú×ÙÊı¾İÍêºÃÂÊ
-    BTP2(ind) = fread(fid, 1, 'uint8');                                     % 2#²¨Êøµ×¸ú×ÙÊı¾İÍêºÃÂÊ
-    BTP3(ind) = fread(fid, 1, 'uint8');                                     % 3#²¨Êøµ×¸ú×ÙÊı¾İÍêºÃÂÊ
-    BTP4(ind) = fread(fid, 1, 'uint8');                                     % 4#²¨Êøµ×¸ú×ÙÊı¾İÍêºÃÂÊ
+    BTP1(ind) = fread(fid, 1, 'uint8');                                     % 1#æ³¢æŸåº•è·Ÿè¸ªæ•°æ®å®Œå¥½ç‡
+    BTP2(ind) = fread(fid, 1, 'uint8');                                     % 2#æ³¢æŸåº•è·Ÿè¸ªæ•°æ®å®Œå¥½ç‡
+    BTP3(ind) = fread(fid, 1, 'uint8');                                     % 3#æ³¢æŸåº•è·Ÿè¸ªæ•°æ®å®Œå¥½ç‡
+    BTP4(ind) = fread(fid, 1, 'uint8');                                     % 4#æ³¢æŸåº•è·Ÿè¸ªæ•°æ®å®Œå¥½ç‡
 
-    fread(fid, 14, 'uchar');                                              % ±£Áô14¸ö×Ö½Ú
+    fread(fid, 14, 'uchar');                                              % ä¿ç•™14ä¸ªå­—èŠ‚
 
-    %% ***************************´«¸ĞÆ÷Êı¾İ£¨´ÅÂŞÅÌ¡¢ÎÂ¶È¡¢Ñ¹Á¦¼°GPSÊı¾İ£©****************** %%
-    Sensor_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                            % Êı¾İÍ·ID: 0x00,0x06
-    Pressure(ind) = fread(fid, 1, 'uint16')/10.0;                            % Ñ¹Á¦´«¸ĞÆ÷Êı¾İ(µ¥Î»:m)
-    Temp(ind) = fread(fid, 1, 'int16')/100.0;                                % ÎÂ¶È´«¸ĞÆ÷Êı¾İ(µ¥Î»:¡æ)
-    Roll(ind) = fread(fid, 1, 'int16')/10.0;                                 % ×İÒ¡Êı¾İ(µ¥Î»:¡ã)
-    Pitch(ind) = fread(fid, 1, 'int16')/10.0;                                % ºáÒ¡Êı¾İ(µ¥Î»:¡ã)
-    Heading(ind) = fread(fid, 1, 'int16')/100.0;                             % º½Ïò½ÇÊı¾İ(µ¥Î»:¡ã)
-    WOE(ind) = fread(fid, 1, 'uchar');                                       % ¾­¶È±êÖ¾Î»
+    %% ***************************ä¼ æ„Ÿå™¨æ•°æ®ï¼ˆç£ç½—ç›˜ã€æ¸©åº¦ã€å‹åŠ›åŠGPSæ•°æ®ï¼‰****************** %%
+    Sensor_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                            % æ•°æ®å¤´ID: 0x00,0x06
+    Pressure(ind) = fread(fid, 1, 'uint16')/10.0;                            % å‹åŠ›ä¼ æ„Ÿå™¨æ•°æ®(å•ä½:m)
+    Temp(ind) = fread(fid, 1, 'int16')/100.0;                                % æ¸©åº¦ä¼ æ„Ÿå™¨æ•°æ®(å•ä½:â„ƒ)
+    Roll(ind) = fread(fid, 1, 'int16')/10.0;                                 % çºµæ‘‡æ•°æ®(å•ä½:Â°)
+    Pitch(ind) = fread(fid, 1, 'int16')/10.0;                                % æ¨ªæ‘‡æ•°æ®(å•ä½:Â°)
+    Heading(ind) = fread(fid, 1, 'int16')/100.0;                             % èˆªå‘è§’æ•°æ®(å•ä½:Â°)
+    WOE(ind) = fread(fid, 1, 'uchar');                                       % ç»åº¦æ ‡å¿—ä½
     Long_deg= fread(fid, 1, 'int16') ;
     Long_sec= fread(fid, 2, 'int16') ;
-    NOS(ind) = fread(fid, 1, 'uchar');                                       % Î³¶È±êÖ¾Î»
+    NOS(ind) = fread(fid, 1, 'uchar');                                       % çº¬åº¦æ ‡å¿—ä½
     Lat_deg= fread(fid, 1, 'int16') ;
     Lat_sec= fread(fid, 2, 'int16') ;
-    fread(fid, 6, 'uchar');                                                % ±£Áô6¸ö×Ö½Ú
+    fread(fid, 6, 'uchar');                                                % ä¿ç•™6ä¸ªå­—èŠ‚
 
-    %% *******************************Êı¾İÎ²¼°Ğ£ÑéºÍÊı¾İ****************************** %%
-    Check_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                              % Êı¾İÍ·ID: 0x00,0x07
-    Voltage(ind) = fread(fid, 1, 'uint16');                                    % µçÑ¹¼ì²â
-    fread(fid, 10, 'uchar');                                                % ±£Áô6¸ö×Ö½Ú
-    Check_Sum(ind) = fread(fid, 1, 'uint16');                                 % Êı¾İ×Ö½ÚºÍ
+    %% *******************************æ•°æ®å°¾åŠæ ¡éªŒå’Œæ•°æ®****************************** %%
+    Check_ID{ind} = dec2hex(fread(fid, 2, 'uchar')) ;                              % æ•°æ®å¤´ID: 0x00,0x07
+    Voltage(ind) = fread(fid, 1, 'uint16');                                    % ç”µå‹æ£€æµ‹
+    fread(fid, 10, 'uchar');                                                % ä¿ç•™6ä¸ªå­—èŠ‚
+    Check_Sum(ind) = fread(fid, 1, 'uint16');                                 % æ•°æ®å­—èŠ‚å’Œ
 
     % ind
 end
@@ -227,7 +227,7 @@ vyb = (V1 - V3) / 2 / sind(24.6);
 vxorg = 0.707 * (vxb - vyb);
 vyorg = 0.707 * (vxb + vyb);
 
-%1´Î10¸ö²ÉÑù
+%1æ¬¡10ä¸ªé‡‡æ ·
 %{
 ind=1;
 for i =1:10:length(RTC_year)
@@ -322,74 +322,74 @@ plottimePlot(end)-plottimePlot(1)
 
 figure(3)
 plot(plottimePlot, RollPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('ºáÒ¡£¨¡ã£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('æ¨ªæ‘‡ï¼ˆÂ°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCP²âÁ¿ºáÒ¡Êı¾İÍ¼','FontSize',18)
+title('ADCPæµ‹é‡æ¨ªæ‘‡æ•°æ®å›¾','FontSize',18)
 
 
 figure(4)
 plot(plottimePlot, PitchPlot, 'b', 'LineWidth', 1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('×İÇã£¨¡ã£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('çºµå€¾ï¼ˆÂ°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCP²âÁ¿×İÇãÊı¾İÍ¼','FontSize',18)
+title('ADCPæµ‹é‡çºµå€¾æ•°æ®å›¾','FontSize',18)
 
 
 figure(5)
 plot(plottimePlot,HeadingPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('º½Ïò£¨¡ã£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('èˆªå‘ï¼ˆÂ°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCP²âÁ¿º½ÏòÊı¾İÍ¼','FontSize',18)
+title('ADCPæµ‹é‡èˆªå‘æ•°æ®å›¾','FontSize',18)
 
 for cell = [2,5,7]
     figure(4*cell+6)
     plot(plottimePlot,vPlot(:,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷ËÙ£¨m/s£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµé€Ÿï¼ˆm/sï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼'],'FontSize',18)
-    %saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼.jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾'],'FontSize',18)
+    %saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾.jpg'])
     
     figure(4*cell+7)
     plot(plottimePlot,anglePlot(:,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷Ïò£¨¡ã£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµå‘ï¼ˆÂ°ï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼'],'FontSize',18)
-    %saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼.jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾'],'FontSize',18)
+    %saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾.jpg'])
     
     
     figure(4*cell+8)
     plot(plottimePlot(15600:16200),vPlot(15600:16200,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷ËÙ£¨m/s£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµé€Ÿï¼ˆm/sï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼(¾Ö²¿)'],'FontSize',18)
-    %saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼(¾Ö²¿).jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾(å±€éƒ¨)'],'FontSize',18)
+    %saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾(å±€éƒ¨).jpg'])
     
     figure(4*cell+9)
     plot(plottimePlot(15600:16200),anglePlot(15600:16200,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷Ïò£¨¡ã£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµå‘ï¼ˆÂ°ï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼(¾Ö²¿)'],'FontSize',18)
-    %saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼(¾Ö²¿).jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾(å±€éƒ¨)'],'FontSize',18)
+    %saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾(å±€éƒ¨).jpg'])
     
 end
 
@@ -416,7 +416,7 @@ save(Name,'WF','WS','WN','WP',...
 
 
 %{
-cell = 1; % ²Î¿¼²ã»æÍ¼£¬Ñ¡Öµ·¶Î§1-cell_Num
+cell = 1; % å‚è€ƒå±‚ç»˜å›¾ï¼Œé€‰å€¼èŒƒå›´1-cell_Num
 figure(1);
 grid on;
 hold on;
@@ -424,15 +424,15 @@ plot(V1(:,cell),'k');
 plot(V2(:,cell),'b');
 plot(V3(:,cell),'c');
 plot(V4(:,cell),'r');
-xlabel('¼¯ºÏÊı');
-ylabel('²¨ÊøËÙ¶È(mm/s)');
+xlabel('é›†åˆæ•°');
+ylabel('æ³¢æŸé€Ÿåº¦(mm/s)');
 legend('V1','V2','V3','V4');
 
-index=2;     % index¼¯ºÏµãÉÏËùÓĞÆÊÃæÁ÷ËÙ·Ö²¼
+index=2;     % indexé›†åˆç‚¹ä¸Šæ‰€æœ‰å‰–é¢æµé€Ÿåˆ†å¸ƒ
 figure(2);
 plot(V1(index,:),'r');
-xlabel('ÆÊÃæµ¥Ôª²ã');
-ylabel('²¨ÊøËÙ¶È(mm/s)');
+xlabel('å‰–é¢å•å…ƒå±‚');
+ylabel('æ³¢æŸé€Ÿåº¦(mm/s)');
 
 
 v = V1;
@@ -451,9 +451,9 @@ for index=1:cellNum
     figure(3)
     plot(v(:,CellRef));
 
-    xlabel('Ñù±¾µãÊı')
-    ylabel('ËÙ¶Èmm/s')
-    title(['µÚ',num2str(CellRef),'²ã²âÁ¿µÄËÙ¶ÈÄ£Öµ'])
+    xlabel('æ ·æœ¬ç‚¹æ•°')
+    ylabel('é€Ÿåº¦mm/s')
+    title(['ç¬¬',num2str(CellRef),'å±‚æµ‹é‡çš„é€Ÿåº¦æ¨¡å€¼'])
     pause;
 end
 AveV=AveV';
@@ -464,16 +464,16 @@ Distance=WF+WS*[1:WN];
 figure
 grid on;
 plot(Distance,AveV)
-xlabel('ÆÊÃæ¾àÀë(m)');
-ylabel('ËÙ¶ÈÄ£Öµ(mm/s)');
-title('¸÷²ã²âÁ¿µÄËÙ¶È¾ùÖµ')
+xlabel('å‰–é¢è·ç¦»(m)');
+ylabel('é€Ÿåº¦æ¨¡å€¼(mm/s)');
+title('å„å±‚æµ‹é‡çš„é€Ÿåº¦å‡å€¼')
 
 figure
 grid on;
 plot(Distance,StdV)
-xlabel('ÆÊÃæ¾àÀë(m)');
-ylabel('ËÙ¶È·½²î(mm/s)');
-title('¸÷²ã²âÁ¿µÄËÙ¶È·½²î')
+xlabel('å‰–é¢è·ç¦»(m)');
+ylabel('é€Ÿåº¦æ–¹å·®(mm/s)');
+title('å„å±‚æµ‹é‡çš„é€Ÿåº¦æ–¹å·®')
 
 EAve=(E1Ave+E2Ave+E3Ave+E4Ave)/4;
 EAve=EAve';

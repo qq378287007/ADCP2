@@ -137,15 +137,15 @@ figure(1)
 plot(plottimePlot,TempPlot+mean(ctdTempPlot)-mean(TempPlot),'r','LineWidth',1.5)
 hold on
 plot(plottimePlot,ctdTempPlot,'b','LineWidth',1.5)
-h = legend('ADCP²âÁ¿ÎÂ¶È','CTD²âÁ¿ÎÂ¶È');
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('ÎÂ¶È£¨¡æ£©','FontSize',15)
+h = legend('ADCPæµ‹é‡æ¸©åº¦','CTDæµ‹é‡æ¸©åº¦');
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('æ¸©åº¦ï¼ˆâ„ƒï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 set(h,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCPÓëCTD²âÁ¿ÎÂ¶È±È¶ÔÍ¼','FontSize',18)
-saveas(gcf,'ADCPÓëCTD²âÁ¿ÎÂ¶È±È¶ÔÍ¼.jpg')
+title('ADCPä¸CTDæµ‹é‡æ¸©åº¦æ¯”å¯¹å›¾','FontSize',18)
+saveas(gcf,'ADCPä¸CTDæµ‹é‡æ¸©åº¦æ¯”å¯¹å›¾.jpg')
 
 
 
@@ -154,46 +154,46 @@ figure(2)
 plot(plottimePlot,PresPlot+mean(ctdPresPlot)-mean(PresPlot),'r','LineWidth',1.5)
 hold on
 plot(plottimePlot,ctdPresPlot,'b','LineWidth',1.5)
-h = legend('ADCP²âÁ¿Éî¶È','CTD²âÁ¿Éî¶È');
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('Éî¶È£¨m£©','FontSize',15)
+h = legend('ADCPæµ‹é‡æ·±åº¦','CTDæµ‹é‡æ·±åº¦');
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('æ·±åº¦ï¼ˆmï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 set(h,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCPÓëCTD²âÁ¿Éî¶È±È¶ÔÍ¼','FontSize',18)
-saveas(gcf,'ADCPÓëCTD²âÁ¿Éî¶È±È¶ÔÍ¼.jpg')
+title('ADCPä¸CTDæµ‹é‡æ·±åº¦æ¯”å¯¹å›¾','FontSize',18)
+saveas(gcf,'ADCPä¸CTDæµ‹é‡æ·±åº¦æ¯”å¯¹å›¾.jpg')
 
 
 figure(3)
 plot(plottimePlot,RollPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('ºáÒ¡£¨¡ã£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('æ¨ªæ‘‡ï¼ˆÂ°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCP²âÁ¿ºáÒ¡Êı¾İÍ¼','FontSize',18)
-saveas(gcf,'ADCP²âÁ¿ºáÒ¡Êı¾İÍ¼.jpg')
+title('ADCPæµ‹é‡æ¨ªæ‘‡æ•°æ®å›¾','FontSize',18)
+saveas(gcf,'ADCPæµ‹é‡æ¨ªæ‘‡æ•°æ®å›¾.jpg')
 
 figure(4)
 plot(plottimePlot,PitchPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('×İÇã£¨¡ã£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('çºµå€¾ï¼ˆÂ°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCP²âÁ¿×İÇãÊı¾İÍ¼','FontSize',18)
-saveas(gcf,'ADCP²âÁ¿×İÇãÊı¾İÍ¼.jpg')
+title('ADCPæµ‹é‡çºµå€¾æ•°æ®å›¾','FontSize',18)
+saveas(gcf,'ADCPæµ‹é‡çºµå€¾æ•°æ®å›¾.jpg')
 
 figure(5)
 plot(plottimePlot,HeadingPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('º½Ïò£¨¡ã£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('èˆªå‘ï¼ˆÂ°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('ADCP²âÁ¿º½ÏòÊı¾İÍ¼','FontSize',18)
-saveas(gcf,'ADCP²âÁ¿º½ÏòÊı¾İÍ¼.jpg')
+title('ADCPæµ‹é‡èˆªå‘æ•°æ®å›¾','FontSize',18)
+saveas(gcf,'ADCPæµ‹é‡èˆªå‘æ•°æ®å›¾.jpg')
 
 
 for i=1:length(ctdCondPlot)
@@ -203,65 +203,65 @@ for i=1:length(ctdCondPlot)
 end
 figure(6)
 plot(plottimePlot,ctdCondPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('µçµ¼ÂÊ£¨mS/cm£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('ç”µå¯¼ç‡ï¼ˆmS/cmï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('CTD²âÁ¿µçµ¼ÂÊÊı¾İÍ¼','FontSize',18)
-saveas(gcf,'CTD²âÁ¿µçµ¼ÂÊÊı¾İÍ¼.jpg')
+title('CTDæµ‹é‡ç”µå¯¼ç‡æ•°æ®å›¾','FontSize',18)
+saveas(gcf,'CTDæµ‹é‡ç”µå¯¼ç‡æ•°æ®å›¾.jpg')
 
 figure(7)
 plot(plottimePlot,ctdSalPlot,'b','LineWidth',1.5)
-xlabel('Ê±¼ä','FontSize',15)
-ylabel('ÑÎ¶È£¨¡ë£©','FontSize',15)
+xlabel('æ—¶é—´','FontSize',15)
+ylabel('ç›åº¦ï¼ˆâ€°ï¼‰','FontSize',15)
 set(gca,'FontSize',15)
 dateaxis('x',17)
 grid on;
-title('CTD²âÁ¿ÑÎ¶ÈÊı¾İÍ¼','FontSize',18)
-saveas(gcf,'CTD²âÁ¿ÑÎ¶ÈÊı¾İÍ¼.jpg')
+title('CTDæµ‹é‡ç›åº¦æ•°æ®å›¾','FontSize',18)
+saveas(gcf,'CTDæµ‹é‡ç›åº¦æ•°æ®å›¾.jpg')
 
 for cell = [2,5,7]
     figure(4*cell+6)
     plot(plottimePlot,vPlot(:,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷ËÙ£¨m/s£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµé€Ÿï¼ˆm/sï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼'],'FontSize',18)
-    saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼.jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾'],'FontSize',18)
+    saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾.jpg'])
     
     figure(4*cell+7)
     plot(plottimePlot,anglePlot(:,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷Ïò£¨¡ã£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµå‘ï¼ˆÂ°ï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼'],'FontSize',18)
-    saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼.jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾'],'FontSize',18)
+    saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾.jpg'])
     
     
     figure(4*cell+8)
     plot(plottimePlot(15600:16200),vPlot(15600:16200,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷ËÙ£¨m/s£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµé€Ÿï¼ˆm/sï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼(¾Ö²¿)'],'FontSize',18)
-    saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ËÙÊı¾İÍ¼(¾Ö²¿).jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾(å±€éƒ¨)'],'FontSize',18)
+    saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµé€Ÿæ•°æ®å›¾(å±€éƒ¨).jpg'])
     
     figure(4*cell+9)
     plot(plottimePlot(15600:16200),anglePlot(15600:16200,cell),'b','LineWidth',1)
-    xlabel('Ê±¼ä','FontSize',15)
-    ylabel('Á÷Ïò£¨¡ã£©','FontSize',15)
+    xlabel('æ—¶é—´','FontSize',15)
+    ylabel('æµå‘ï¼ˆÂ°ï¼‰','FontSize',15)
     set(gca,'FontSize',15)
     dateaxis('x',17)
     grid on;
-    title(['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼(¾Ö²¿)'],'FontSize',18)
-    saveas(gcf,['ADCP²âÁ¿µÚ',num2str(cell),'²ãÁ÷ÏòÊı¾İÍ¼(¾Ö²¿).jpg'])
+    title(['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾(å±€éƒ¨)'],'FontSize',18)
+    saveas(gcf,['ADCPæµ‹é‡ç¬¬',num2str(cell),'å±‚æµå‘æ•°æ®å›¾(å±€éƒ¨).jpg'])
     
 end
 % close all
